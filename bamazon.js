@@ -18,13 +18,8 @@ connection.connect(function(err){
 var makeTable = function (){
     connection.query("SELECT * FROM products", function(err, res){
         for(var i=0; i<res.length; i++){
-            
-            
-            
-            console.log(res[i].item_id+" || "+res[i].product_name+" || "+res[i].department_name+" || "+res[i].price+" || "+res[i].stock_quatity+"\n");
-            
+            console.log(res[i].item_id+" || "+res[i].product_name+" || "+res[i].department_name+" || "+res[i].price+" || "+res[i].stock_quantity+"\n");          
         }
-
     promptUser(res);
     })
 }
@@ -57,8 +52,8 @@ var promptUser = function(res){
                         }
                     }
                 }).then(function(answer){
-                    if((res[id].stock_quatity-answer.quant)>0){
-                        connection.query("UPDATE products SET stock_quatity='"+(res[id].stockqunatity-answer.quant)+"' WHERE product_name='"+product+"'", function(err,res2){
+                    if((res[id].stock_quantity-answer.quant)>0){
+                        connection.query("UPDATE products SET stock_quantity='"+(res[id].stock_quantity-answer.quant)+"' WHERE product_name='"+product+"'", function(err,res2){
                             console.log("Product Bought!");
                             makeTable();
                         })
@@ -71,8 +66,8 @@ var promptUser = function(res){
             }
             if(i==res.length && correct==false){
                 console.log("Not a valid selection!");
-                promptCustomer(res);
+                promptUser(res);
             }
         })
     }
-    
+  
